@@ -1,0 +1,36 @@
+<header class="header">
+    <h1 class="header-heading">
+        <a href="{% url "agenda:index" %}" class="header-link">Agenda</a>
+    </h1>
+    <nav class="menu">
+        <ul class="menu-list">
+
+            {% if user.is_authenticated %}
+            <li class="menu-item">
+                <a href="#" class="menu-link">Create</a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">Profile</a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">Logout</a>
+            </li>
+            {% else %}
+            <li class="menu-item">
+                <a href="#" class="menu-link">Login</a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">Register</a>                
+            </li>
+
+
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="search">
+        <form action="#" method="GET">
+            <input type="search" class="search-input" placeholder="Search" id="search" name="q"
+                value="{{ request.GET.q.strip }}">
+        </form>
+    </div>
+</header>
