@@ -7,5 +7,5 @@ from django.shortcuts import render
 def index(request):
     return render(
         request,
-        'agenda/index.html',
+        'agenda/pages/index.html',
     )

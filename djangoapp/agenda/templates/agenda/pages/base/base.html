@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include "agenda//partials/base/_head.html" %}
+</head>
+
+<body>
+    {% include "agenda/partials/base/_header.html" %}
+
+    {% include "agenda/partials/base/_messages.html" %}
+
+    <main class="content">
+        {% block content %}{% endblock content %}
+        {% include "agenda/partials/base/_pagination.html" %}
+    </main>
+</body>
+
+</html>
