@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 def index(request):
     contacts = Contact.objects \
         .filter(show=True)\
+        .filter(owner=request.user) \
         .order_by('-id')
 
     paginator = Paginator(contacts, 10)

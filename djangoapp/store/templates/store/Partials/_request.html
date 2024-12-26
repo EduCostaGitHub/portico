@@ -1,0 +1,53 @@
+{% load static %}
+{% load omfilters %}
+<div class="row">
+    <div class="col">
+        <h3>{{request}}</h3>
+
+        <div class="row mt-4">
+            <div class="col-lg-2 font-weight-bold">Request Number:</div>
+            <div class="col-lg-4">{{ request.id}}</div>
+            <div class="col-lg-2 font-weight-bold">Total:</div>
+            <div class="col-lg-4">{{ request.total | format_price }}</div>
+
+            <div class="col-lg-2 font-weight-bold">QTY. Itens:</div>
+            <div class="col-lg-4">{{request.qtd_total}}</div>
+            <div class="col-lg-2 font-weight-bold">Status:</div>
+            <div class="col-lg-4">{{ request.get_status_display }}</div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <h3>Products</h3>
+            </div>
+        </div>
+
+        <div class="table-responsive mt-3">
+            <table class="table">
+                <tr>
+                    <th class="d-none d-lg-block">Image</th>
+                    <th>Product</th>
+                    <th>Type</th>
+                    <th>QTY</th>
+                    <th>Total</th>
+                </tr>
+
+                {% for item in request.itemrequest_set.all %}
+                <tr>
+                    <td class="d-none d-lg-block">
+                        <img class="cart-img" src="{% get_media_prefix %}{{item.image}}">
+                    </td>
+                    <td>{{item.product}}</td>
+                    <td>{{item.productType}}</td>
+                    <td>{{item.quantity}}</td>
+                    {% if item.promo_price %}
+                    <td>{{item.promo_price | format_price}}</td>
+                    {% else %}
+                    <td>{{item.price | format_price}}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>

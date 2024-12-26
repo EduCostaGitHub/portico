@@ -23,6 +23,7 @@ from landing.views import index
 urlpatterns = [
     path('', index, name='index'),
     path('agenda/', include('agenda.urls')),
+    path('store/', include('store.urls')),
     path('admin/', admin.site.urls),
 ]
 
