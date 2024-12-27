@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "store/base/base.html" %}
 {% load omfilters %}
 
 {% block title %}Products | {% endblock %}
@@ -11,7 +11,7 @@
             {% for product in products %}
             <div class="card">
                 {% if product.image %}
-                <a href="{% url 'product:detail' product.slug %}">
+                <a href="{% url 'store:detail' product.slug %}">
                     <img class="card-img-top" src="{{product.image.url}}" alt="{{ product.name }}">
                 </a>
                 {% endif %}
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="card-footer bg-transparent border-top-light-custom text-center">
-                    <a href="{% url 'product:detail' product.slug %}" class="btn btn-primary btn-sm m-1 btn-block">
+                    <a href="{% url 'store:detail' product.slug %}" class="btn btn-primary btn-sm m-1 btn-block">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         Buy
                     </a>
@@ -47,7 +47,7 @@
 
 <div class="row mt-3">
     <div class="col">
-        {% include "partials/_pagination.html" %}
+        {% include "store/partials/_pagination.html" %}
     </div>
 </div>
 

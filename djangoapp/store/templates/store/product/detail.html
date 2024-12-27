@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load omfilters %}
+
+{% block title %}{{ product.name }} | {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg">
+                <div class="row no-gutters">
+                    <div class="col-lg-12">
+                        {% if product.image %}
+                        <img class="img-fluid" src="{{product.image.url}}" alt="{{ product.name }}">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="mt-4 mt-lg-0">
+                    <h1 class="h2">{{product.name}}</h1>
+                    <p class="lead">{{product.short_description}}</p>
+                    <p class="lead">
+                        {% if product.promo_price %}
+                        <span id="variation-preco-promocional" class="lead product-price">
+                            {{ product.promo_price | format_price }}
+                        </span>
+                        <span id="variation-preco" class="lead product-old-price text-muted">
+                            {{ product.price | format_price }}
+                        </span>
+                        {% else %}
+                        <span id="variation-preco" class="lead product-price">
+                            {{ product.price | format_price }}
+                        </span>
+                        {% endif %}
+                    </p>
+
+                    <form action="{% url 'product:addtocart' %}" id="form-add-to-cart">
+                        <div class="form-group">
+                            <select id="select-variacoes" name="pType_id" class="form-control form-control-lg">
+
+                                {% for type in product.producttype_set.all %}
+                                <option data-preco="{{type.price | format_price}}"
+                                    data-preco-promocional="{{ type.promo_price | format_price}}" value="{{type.id}}">
+                                    {{ type.name }}
+                                </option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+
+                        <div class="text-left">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                Add to cart
+                            </button>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mt-5 mb-5">
+                    <h2 class="text-center">{{ product.name }}</h2>
+                    <p>{{ product.description | linebreaks }}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

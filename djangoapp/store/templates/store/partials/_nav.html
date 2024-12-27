@@ -1,7 +1,7 @@
 {% load omfilters %}
 
 <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
-    <a class="navbar-brand" href="{% url 'product:list' %}">E-commerce</a>
+    <a class="navbar-brand" href="{% url 'store:list' %}">E-commerce</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'product:list' %}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'store:list' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -23,21 +23,21 @@
                     Account
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'request:list' %}">Requests</a>
-                    <a class="dropdown-item" href="{% url 'profile:create' %}">Update</a>
-                    <a class="dropdown-item" href="{% url 'profile:logout' %}">Logout</a>
+                    <a class="dropdown-item" href="{% url 'store:request_list' %}">Requests</a>
+                    <a class="dropdown-item" href="{% url 'store:profile_create' %}">Update</a>
+                    <a class="dropdown-item" href="{% url 'store:profile_logout' %}">Logout</a>
                 </div>
             </li>
             {% else %}
-
+            
             <li class="nav-item">
-                <a class="nav-link disable" href="{% url 'profile:create' %}">Login</a>
+                <a class="nav-link disable" href="{% url "store:profile_create" %}">Login</a>
             </li>
 
             {% endif %}
 
             <li class="nav-item">
-                <a class="nav-link nav-cart-link active" href="{% url 'product:cart' %}">
+                <a class="nav-link nav-cart-link active" href="#">
                     <span class="nav-cart-text mr-1">
                         Cart
                     </span>
@@ -52,7 +52,7 @@
                 </a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'product:search' %}">
+        <form class="form-inline my-2 my-lg-0" method="GET" action="#">
             <input name="term" value="{{request.GET.term}}" class="form-control mr-sm-2 type" type="search"
                 placeholder="Search" aria-label="Search">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
