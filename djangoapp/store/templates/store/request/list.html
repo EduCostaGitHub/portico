@@ -1,0 +1,43 @@
+{% extends "store/base/base.html" %}
+{% block content %}
+{% load omfilters %}
+
+{% block title %}{{user}} requests | {% endblock %}
+
+<div class="row">
+    <div class="col">
+        <h3 class="mb-4">Requests of {{ user.first_name }} {{ user.last_name }}</h3>
+        <p>Requests on store</p>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th scope="col">Request</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Qty. Items</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Details</th>
+                </tr>
+
+                {% for request in requests %}
+                <tr>
+                    <th scope="row">{{ request }}</td>
+                    <td>{{ request.total | format_price }}</td>
+                    <td>{{request.qtd_total}}</td>
+                    <td>{{ request.get_status_display }}</td>
+                    <td>
+                        <a href="{% url 'store:request_detail' request.id %}">
+                            Ver <i class="fas fa-search-plus ml-2"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</div>
+
+{% include "store/partials/_pagination.html" %}
+
+{% endblock content %}

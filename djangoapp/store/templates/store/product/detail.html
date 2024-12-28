@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "store/base/base.html" %}
 {% load omfilters %}
 
 {% block title %}{{ product.name }} | {% endblock %}
@@ -35,7 +35,7 @@
                         {% endif %}
                     </p>
 
-                    <form action="{% url 'product:addtocart' %}" id="form-add-to-cart">
+                    <form action="{% url 'store:addtocart' %}" id="form-add-to-cart">
                         <div class="form-group">
                             <select id="select-variacoes" name="pType_id" class="form-control form-control-lg">
 

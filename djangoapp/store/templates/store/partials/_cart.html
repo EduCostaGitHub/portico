@@ -18,10 +18,10 @@
             </td>
             <td>
 
-                <a href="{% url 'product:detail' item.slug %}">
+                <a href="{% url 'store:detail' item.slug %}">
                     {{item.product_name}}
                 </a>
-                <a class="ml-3" href="{% url 'product:removefromcart' %}?id={{ item.pType_id }}">
+                <a class="ml-3" href="{% url 'store:removefromcart' %}?id={{ item.pType_id }}">
                     <i class="fas fa-times-circle text-danger" aria-hidden="true"></i>
                 </a>
             </td>

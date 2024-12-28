@@ -37,7 +37,7 @@
             {% endif %}
 
             <li class="nav-item">
-                <a class="nav-link nav-cart-link active" href="#">
+                <a class="nav-link nav-cart-link active" href="{% url "store:cart" %}">
                     <span class="nav-cart-text mr-1">
                         Cart
                     </span>
@@ -52,7 +52,7 @@
                 </a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" method="GET" action="#">
+        <form class="form-inline my-2 my-lg-0" method="GET" action="{% url "store:search" %}">
             <input name="term" value="{{request.GET.term}}" class="form-control mr-sm-2 type" type="search"
                 placeholder="Search" aria-label="Search">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>

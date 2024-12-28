@@ -13,7 +13,7 @@ from store.utils import utils
 class DispatchLoginRequiredMixin(View):
     def dispatch(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
-            return redirect('profile:create')
+            return redirect('store:profile_create')
 
         return super().dispatch(*args, **kwargs)
 
@@ -26,7 +26,7 @@ class DispatchLoginRequiredMixin(View):
 # Create your views here.
 
 class RequestPay(DispatchLoginRequiredMixin, DetailView):
-    template_name = 'request/pay.html'
+    template_name = 'store/request/pay.html'
     model = Requests
     pk_url_kwarg = 'pk'
     context_object_name = 'request'
@@ -34,7 +34,7 @@ class RequestPay(DispatchLoginRequiredMixin, DetailView):
 
 class RequestSave(View):
 
-    template_name = 'request/pay.html'
+    template_name = 'store/request/pay.html'
 
     def get(self, *args, **kwargs):
         # get cart
@@ -47,14 +47,14 @@ class RequestSave(View):
                 self.request,
                 'You need to login',
             )
-            return redirect('profile:create')
+            return redirect('store:profile_create')
 
         if not cart:
             messages.error(
                 self.request,
                 'Cart is empty!',
             )
-            return redirect('product:list')
+            return redirect('store:list')
 
         cart_ProductTypes_ids = [v for v in cart]
 
@@ -129,7 +129,7 @@ class RequestSave(View):
         del self.request.session['cart']
         return redirect(
             reverse(
-                'request:pay',
+                'store:request_pay',
                 kwargs={
                     'pk': request.pk,
                 }
@@ -140,7 +140,7 @@ class RequestSave(View):
 class RequestList(DispatchLoginRequiredMixin, ListView):
     model = Requests
     context_object_name = 'requests'
-    template_name = 'request/list.html'
+    template_name = 'store/request/list.html'
     paginate_by = 5
     ordering = ['-id']
 
@@ -148,5 +148,5 @@ class RequestList(DispatchLoginRequiredMixin, ListView):
 class RequestDetail(DispatchLoginRequiredMixin, DetailView):
     model = Requests
     context_object_name = 'request'
-    template_name = 'request/detail.html'
+    template_name = 'store/request/detail.html'
     pk_url_kwarg = 'id'

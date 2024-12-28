@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "store/base/base.html" %}
 {% load omfilters %}
 
 {% block title %}Summary | {% endblock %}
@@ -10,7 +10,7 @@
         <h2>Resume</h2>
 
         <p class="lead">User</p>
-        <p>To Edit, <a href="{% url 'profile:create' %}">click</a></p>
+        <p>To Edit, <a href="{% url 'store:profile_create' %}">click</a></p>
         <dl class="row">
             <dt class="col-lg-2">Name:</dt>
             <dd class="col-lg-4">{{ user.first_name}}</dd>
@@ -29,7 +29,7 @@
         </dl>
 
         <p class="lead">Address</p>
-        <p> To Edit, <a href="{% url 'profile:create' %}">click</a></p>
+        <p> To Edit, <a href="{% url 'store:profile_create' %}">click</a></p>
         <dl class="row">
             <dt class="col-lg-2">Address:</dt>
             <dd class="col-lg-4">{{profile.address}}</dd>
@@ -57,7 +57,7 @@
 
         <div class="table-responsive">
 
-            {% include "partials/_cart.html" %}
+            {% include "store/partials/_cart.html" %}
 
         </div>
     </div>
@@ -73,7 +73,7 @@
                 <td>{{ request.session.cart | cart_total | format_price }}</td>
                 <td>
                     <div class="col">
-                        <a class="btn btn-block btn-primary btn-lg" href="{% url 'request:save' %}">
+                        <a class="btn btn-block btn-primary btn-lg" href="{% url 'store:request_save' %}">
                             Buy
                         </a>
                     </div>

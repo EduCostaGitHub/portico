@@ -1,0 +1,12 @@
+{% extends "store/base/base.html" %}
+{% load static %}
+{% load omfilters %}
+
+{% block title %}{{ request }} | {% endblock %}
+
+{% block content %}
+
+{% include "store/partials/_request.html" %}
+
+
+{% endblock content %}
