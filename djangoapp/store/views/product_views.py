@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.views import View
 from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # to debug
@@ -170,8 +171,14 @@ class Resume(View):
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
             return redirect('store:profile_create')
-
-        profile = UserProfile.objects.get(user=self.request.user)
+        try:
+            profile = UserProfile.objects.get(user=self.request.user)
+        except ObjectDoesNotExist:
+            messages.error(
+                self.request,
+                'Please register as a e-commerce user'
+            )
+            return redirect('store:profile_create')
         # check if profile exists
         if not profile:
             messages.error(
