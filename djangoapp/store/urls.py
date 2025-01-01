@@ -31,7 +31,4 @@ urlpatterns = [
     path('request/list/', RequestList.as_view(), name='request_list'),
     path('request/detail/<int:id>', RequestDetail.as_view(), name='request_detail'),
 
-
-
-
 ]
