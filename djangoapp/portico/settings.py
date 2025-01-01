@@ -52,9 +52,14 @@ INSTALLED_APPS = [
     'landing',
     'agenda',
     'store',
+    'blog',
     # external apps
     'crispy_forms',
     'crispy_bootstrap4',
+    # Summernote
+    'django_summernote',
+    # Axes
+    'axes',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -68,6 +73,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # AxesMiddleware should be the last middleware in the MIDDLEWARE list.
+    # It only formats user lockout messages and renders Axes lockout responses
+    # on failed user authentication attempts from login views.
+    # If you do not want Axes to override the authentication response
+    # you can skip installing the middleware and use your own views.
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'portico.urls'
@@ -169,3 +181,43 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
 
 # Salvar a cada requisição
 SESSION_SAVE_EVERY_REQUEST = False
+
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        # Toolbar customization
+        # https://summernote.org/deep-dive/#custom-toolbar-popover
+        'toolbar': [
+            ['style', ['style', ]],
+            ['font', ['bold', 'italic', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph', 'hr', ]],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']],
+            ['view', ['fullscreen', 'codeview', 'undo', 'redo']],
+        ],
+        'codemirror': {
+            'mode': 'htmlmixed',
+            'lineNumbers': 'true',
+            'lineWrapping': 'true',
+            'theme': 'dracula',
+        },
+    },
+    'css': (
+        '//cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/dracula.min.css',
+    ),
+    'attachment_filesize_limit': 30 * 1024 * 1024,
+    'attachment_model': 'blog.PostAttachment',
+}
+
+AUTHENTICATION_BACKENDS = [
+    # AxesStandaloneBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesStandaloneBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+AXES_ENABLED = True
+AXES_FAILURE_LIMIT = 6
+AXES_COOLOFF_TIME = 1  # 1 hour
+AXES_RESET_ON_SUCCES = True

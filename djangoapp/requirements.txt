@@ -4,3 +4,5 @@ Pillow>=9.5.0,<9.6
 python-dotenv>=1.0.1,<1.1
 django-crispy-forms>=2.3,<2.4
 crispy-bootstrap4>=2024.10,<2024.11
+django-axes>=6.4.0,<6.5
+django-summernote>=0.8.20.0,<0.8.21
