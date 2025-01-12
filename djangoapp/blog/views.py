@@ -109,8 +109,9 @@ class TagListView(PostListView):
         context = super().get_context_data(**kwargs)
         slug = self.kwargs.get('slug')
 
-        # page_title = f'{self.object_list[0].tags.filter(
-        #     slug=slug).first().name} - '  # type: ignore
+        title = self.object_list[0].tags.filter(slug=slug).first().name
+
+        page_title = f'{title} - '
 
         context.update({
             'page_title': page_title,
